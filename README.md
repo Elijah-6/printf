@@ -2,3 +2,7 @@
 ## git pull
 
 #### _printf.c is the name of the file containing _printf function.
+#### _puts is a function to print strings and return the number of characters printed.
+#### main.h contains the header files
+
+
