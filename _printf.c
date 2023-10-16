@@ -9,7 +9,7 @@
  */
 int _printf(const char *format, ...)
 {
-	unsigned int i, count = 0;
+	unsigned int i, j, count = 0;
 
 	va_list args;
 
@@ -17,9 +17,15 @@ int _printf(const char *format, ...)
 
 	for (i = 0; format[i] != '\0'; i++)
 	{
+		j = i + 1;
 		if (format[i] != '%')
 		{
 			_putchar(format[i]);
+		}
+		else if (format[i] == '%' && format[j] == 'c')
+		{
+			i++;
+			_putchar(va_arg(args, int));
 		}
 		count++;
 	}
