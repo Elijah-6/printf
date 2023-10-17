@@ -1,19 +1,30 @@
 #include "main.h"
-/**
- *_puts - print a given string
- *
- * @str : string to print out
- *
- * Return: number of chars in string
- */
 
-int _puts(char *str)
+/**
+ * _print_string - Print a string
+ * @args: The string to be printed
+ * Return: The number of characters printed
+ */
+int _print_string(const char *str)
 {
 	int count = 0;
 
-	for (count = 0; str[count] != '\0'; count++)
+	while (*str)
 	{
-		_putchar(str[count]);
+		_putchar(*str);
+		str++;
+		count++;
 	}
 	return (count);
+}
+
+/**
+ * _print_char - Print a character
+ * @args: The character to be printed
+ * Return: The number of characters printed
+ */
+int _print_char(char c)
+{
+	_putchar(c);
+	return (1);
 }

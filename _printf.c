@@ -9,7 +9,7 @@
  */
 int _printf(const char *format, ...)
 {
-	unsigned int i, s_count, count = 0;
+	unsigned int i, count = 0;
 	int num = 0;
 
 	va_list args;
@@ -32,26 +32,18 @@ int _printf(const char *format, ...)
 				return (-1);
 			}
 			else if (format[i] == 'c')
-			{
-				_putchar(va_arg(args, int));
-				count++;
-			}
+				count += _print_char(va_arg(args, int));
 			else if (format[i] == 's')
-			{
-				s_count = _puts(va_arg(args, char *));
-				count += s_count;
-			}
+				count += _print_string(va_arg(args, char *));
 			else if (format[i] == 'd' || format[i] == 'i')
 			{
 				num = va_arg(args, int);
 				if  (num < 0)
 				{
-					_putchar('-');
-					count++;
+					count += _print_char('-');
 					num = -num;
 				}
-				print_number(num);
-				count += num_length(num);
+				count += _print_number(num);
 			}
 			else if (format[i] == '%')
 			{
