@@ -9,7 +9,7 @@
  */
 int _printf(const char *format, ...)
 {
-	unsigned int i, j, s_count, count = 0;
+	unsigned int i, s_count, count = 0;
 
 	va_list args;
 
@@ -17,29 +17,41 @@ int _printf(const char *format, ...)
 
 	for (i = 0; format[i] != '\0'; i++)
 	{
-		j = i + 1;
 		if (format[i] != '%')
 		{
 			_putchar(format[i]);
+			count++;
 		}
 		else
 		{
-			switch (format[j])
-			{
-				case 'c':
-					_putchar(va_arg(args, int));
-					break;
-				case 's':
-					s_count = _puts(va_arg(args, char *));
-					count += (s_count - 1);
-					break;
-				case '%':
-					_putchar(format[j]);
-					break;
-			}
 			i++;
+			if (format[i] == '\0')
+			{
+				va_end(args);
+				return (-1);
+			}
+			else if (format[i] == 'c')
+			{
+				_putchar(va_arg(args, int));
+				count++;
+			}
+			else if (format[i] == 's')
+			{
+				s_count = _puts(va_arg(args, char *));
+				count += s_count;
+			}
+			else if (format[i] == '%')
+			{
+				_putchar('%');
+				count++;
+			}
+			else
+			{
+				va_end(args);
+				return (-1);
+			}
 		}
-		count++;
+		
 	}
 	va_end(args);
 	return (count);
