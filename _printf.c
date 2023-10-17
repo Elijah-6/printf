@@ -27,19 +27,17 @@ int _printf(const char *format, ...)
 			switch (format[j])
 			{
 				case 'c':
-					i++;
 					_putchar(va_arg(args, int));
 					break;
 				case 's':
 					s_count = _puts(va_arg(args, char *));
-					i++;
 					count += (s_count - 1);
 					break;
 				case '%':
 					_putchar(format[j]);
-					i++;
 					break;
 			}
+			i++;
 		}
 		count++;
 	}
