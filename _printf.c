@@ -10,6 +10,7 @@
 int _printf(const char *format, ...)
 {
 	unsigned int i, s_count, count = 0;
+	int num = 0;
 
 	va_list args;
 
@@ -40,6 +41,18 @@ int _printf(const char *format, ...)
 				s_count = _puts(va_arg(args, char *));
 				count += s_count;
 			}
+			else if (format[i] == 'd' || format[i] == 'i')
+			{
+				num = va_arg(args, int);
+				if  (num < 0)
+				{
+					_putchar('-');
+					count++;
+					num = -num;
+				}
+				print_number(num);
+				count += num_length(num);
+			}
 			else if (format[i] == '%')
 			{
 				_putchar('%');
@@ -51,7 +64,6 @@ int _printf(const char *format, ...)
 				return (-1);
 			}
 		}
-		
 	}
 	va_end(args);
 	return (count);
